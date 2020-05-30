@@ -11,32 +11,22 @@ let count = 0;
 //자동 슬라이드
 function slide_event(){
     const current_child = document.querySelector(`.${ACTIVE_CLASS}`);
-    current_child.classList.remove(`${ACTIVE_CLASS}`);
-    if(count === 4){
-        slide_item.classList.add(`${ACTIVE_CLASS}`);
-        count = 0;
-    }
-    else{
+    if(count !== 5){
+        current_child.classList.remove(`${ACTIVE_CLASS}`);
         const next_slide = current_child.nextElementSibling;
         next_slide.classList.add(`${ACTIVE_CLASS}`);
+    
         count++;
+        slide_list.style.transition = "transform 0.6s";
+        slide_list.style.transform = 'translate3d(' + -(SIZE*count) + 'px, 0, 0)';
     }
-    slide_list.style.transition = "transform 0.7s";
-    slide_list.style.transform = 'translate3d(' + -(SIZE*count) + 'px, 0, 0)';
-}
-
-//이전버튼, 다음버튼 가리기
-function btnDisplay(){
-    if(count === 0){
-        prevBtn.style.display = 'none';
-    }
-    else if(count === 4){
-        nextBtn.style.display = 'none';
-    }
-    else{
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'block';
-    }
+    else if(count === 5){
+        count = 0;
+        current_child.classList.remove(`${ACTIVE_CLASS}`);
+        slide_item.classList.add(`${ACTIVE_CLASS}`);
+        slide_list.style.transition = "transform 0s";
+        slide_list.style.transform = 'translate3d(' + -(SIZE*count) + 'px, 0, 0)';
+    } 
 }
 
 //prevBtn 클릭
@@ -48,13 +38,13 @@ function prevBtn_event(e){
         const prev_slide = current_child.previousElementSibling;
         prev_slide.classList.add(`${ACTIVE_CLASS}`);
         count --;
-        slide_list.style.transition = "transform 0.7s";
+        slide_list.style.transition = "transform 0.6s";
         slide_list.style.transform = 'translate3d(' + -(SIZE*count) + 'px, 0, 0)';
     }
 }
 //nextBtn 클릭
 function nextBtn_event(e){
-    if(count !== 4){
+    if(count <= 4){
         const current_child = document.querySelector(`.${ACTIVE_CLASS}`);
         current_child.classList.remove(`${ACTIVE_CLASS}`);
 
@@ -62,7 +52,7 @@ function nextBtn_event(e){
         next_slide.classList.add(`${ACTIVE_CLASS}`);
 
         count ++;
-        slide_list.style.transition = "transform 0.7s";
+        slide_list.style.transition = "transform 0.6s";
         slide_list.style.transform = 'translate3d(' + -(SIZE*count) + 'px, 0, 0)';
     }
 }
