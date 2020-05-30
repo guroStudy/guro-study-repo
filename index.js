@@ -20,8 +20,10 @@ function slide_event(){
         slide_list.style.transition = "transform 0.6s";
         slide_list.style.transform = 'translate3d(' + -(SIZE*count) + 'px, 0, 0)';
     }
+    //5슬라이드->1슬라이드로 넘어가기
     else if(count === 5){
         count = 0;
+
         current_child.classList.remove(`${ACTIVE_CLASS}`);
         slide_item.classList.add(`${ACTIVE_CLASS}`);
         slide_list.style.transition = "transform 0s";
@@ -37,6 +39,7 @@ function prevBtn_event(e){
 
         const prev_slide = current_child.previousElementSibling;
         prev_slide.classList.add(`${ACTIVE_CLASS}`);
+
         count --;
         slide_list.style.transition = "transform 0.6s";
         slide_list.style.transform = 'translate3d(' + -(SIZE*count) + 'px, 0, 0)';
@@ -44,7 +47,7 @@ function prevBtn_event(e){
 }
 //nextBtn 클릭
 function nextBtn_event(e){
-    if(count <= 4){
+    if(count < 5){
         const current_child = document.querySelector(`.${ACTIVE_CLASS}`);
         current_child.classList.remove(`${ACTIVE_CLASS}`);
 
@@ -61,7 +64,6 @@ function nextBtn_event(e){
 function slide(){
     slide_item.classList.add('active');
     setInterval(slide_event, 2000);
-
     prevBtn.addEventListener('click', prevBtn_event);
     nextBtn.addEventListener('click', nextBtn_event);
 }
