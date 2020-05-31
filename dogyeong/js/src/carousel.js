@@ -1,3 +1,4 @@
+import Track from './track.js'
 
 export default class Carousel {
 
@@ -7,6 +8,7 @@ export default class Carousel {
     trackContainer = null
     track = null
     currentNum = 0
+    isMoving = false
 
     constructor(target, options) {
         this.targetWidth = target.offsetWidth || target.getBoundingClientRect().width;
@@ -22,27 +24,24 @@ export default class Carousel {
         this.contents.unshift(lastContent)
 
         // target 비우기
-        target.innerText = '';
+        target.innerText = ''
 
         // target class 추가
         target.classList.add('carousel-container')
 
-        // track container, track 생성
+        // track container 생성 
         this.trackContainer = document.createElement('div')
         this.trackContainer.className = 'carousel-track-container'
-        this.track = document.createElement('div')
-        this.track.className = 'carousel-track'
-        this.track.style.width = this.targetWidth * this.contents.length + 'px'
-        this.track.style.transform = `translate3d(-${this.targetWidth}px, 0px, 0px)`;
-        this.trackContainer.appendChild(this.track)
+
+        // track 생성
+        this.track = new Track(this.targetWidth, this.contents.length)
+        
+        // track 의 container, contents 설정
+        this.track.setContainer(this.trackContainer)
+        this.track.setContents(this.contents)
+
         target.appendChild(this.trackContainer)
-
-        // track에 내용 추가
-        this.contents.forEach(content => {
-            content.style.width = this.targetWidth + 'px';
-            this.track.appendChild(content)
-        })
-
+        
         // 버튼 생성
         this.prevButton = document.createElement('button')
         this.prevButton.className = 'carousel-prev'
@@ -69,44 +68,49 @@ export default class Carousel {
     }
 
     prev = async () => {
+        if(this.isMoving) return;
+
         this.currentNum--
         await this.move()
         
         if(this.currentNum < 0) {
             this.currentNum = this.contentsNum - 1
-            this.setTransform()
+            this.track.setTransform(-this.targetWidth * (this.currentNum+1))
         }
     }
 
     next = async () => {
+        if(this.isMoving) return;
+
         this.currentNum++
         await this.move()
         
         if(this.currentNum >= this.contentsNum) {
             this.currentNum = 0
-            this.setTransform()
+            this.track.setTransform(-this.targetWidth * (this.currentNum+1))
         }
     }
 
     moveTo = async (index) => {
+        if(this.isMoving) return;
+
         this.currentNum = parseInt(index)
         await this.move()
     }
 
     move = async () => {
+        this.isMoving = true;
         this.setDots()
-        this.addTransition()
-        this.setTransform()
-        await new Promise((resolve) => {
-            setTimeout(() => resolve(this.removeTransition()), 500)
+        this.track.addTransition()
+        this.track.setTransform(-this.targetWidth * (this.currentNum+1))
+        
+        await new Promise(resolve => {
+            setTimeout(() => {
+                resolve(this.track.removeTransition())
+                this.isMoving = false;
+            }, 500)
         })
     }
-
-    setTransform = () => this.track.style.transform = `translate3d(${-this.targetWidth*(this.currentNum+1)}px, 0px, 0px)`
-
-    addTransition = () => this.track.style.transition = 'transform 0.5s ease'
-
-    removeTransition = () => this.track.style.transition = ''
 
     setDots = () => {
         const lists = document.querySelectorAll('.carousel-dots li')

@@ -1,6 +1,6 @@
-#container {
-    width: 600px;
-    margin: auto;
+#container * {
+    padding: 0;
+    margin: 0;
 }
 
 .carousel-container {
@@ -16,12 +16,12 @@
     -ms-touch-action: pan-y;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
-    
 }
 
 .carousel-track-container {
     position: relative;
     overflow: hidden;
+    background-color: #3333;
 }
 
 .carousel-track {
