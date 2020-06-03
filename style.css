@@ -85,9 +85,4 @@ button{
     height: 15px;
     background-color: lightgray;
     border-radius: 50%;
-    cursor: pointer;
-}
-
-.click_btn{
-    background-color: gray;
 }

@@ -14,14 +14,25 @@ const SIZE = slide_element[0].clientWidth;
 const S_LENGTH = slide_element.length - 2;
 
 let count = 1;
+check_btn[count-1].style.backgroundColor = 'gray';
 
 //자동 슬라이드
 function slide_event(){
     const current_child = document.querySelector(`.${ACTIVE_CLASS}`);
     const next_slide = current_child.nextElementSibling;
+    if(count < 6){
+        check_btn[count-1].style.backgroundColor = 'lightgray';
+    }else{
+        check_btn[check_btn.length-1].style.backgroundColor = 'lightgray';
+    }
 
     count++;
-
+    if(count < 6){
+        check_btn[count-1].style.backgroundColor = 'gray';
+    } else{
+        check_btn[0].style.backgroundColor = 'gray';
+    }
+   
     slide_list.style.transition = "transform 0.6s";
     slide_list.style.transform = 'translateX(' + -(SIZE*count) + 'px)';
 
@@ -30,6 +41,7 @@ function slide_event(){
     if(count === S_LENGTH+2){
         first_slide.classList.add(`${ACTIVE_CLASS}`);
         count = 1;
+        
         slide_list.style.removeProperty('transition');
         slide_list.style.transform = 'translateX(' + -(SIZE*count) + 'px)';
     } 
@@ -43,6 +55,7 @@ function slide_event(){
 //prevBtn 클릭
 function prevBtn_event(e){
     count --;
+    
     const current_child = document.querySelector(`.${ACTIVE_CLASS}`);
     current_child.classList.remove(`${ACTIVE_CLASS}`);
 
@@ -64,6 +77,7 @@ function prevBtn_event(e){
 //nextBtn 클릭
 function nextBtn_event(e){
     count ++;
+
     const current_child = document.querySelector(`.${ACTIVE_CLASS}`);
     current_child.classList.remove(`${ACTIVE_CLASS}`);
 
