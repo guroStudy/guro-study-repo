@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Marvel Slider</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script
+      src="https://kit.fontawesome.com/232d9d6904.js"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <header class="header">
+        <h1 class="title">Marvel</h1>
+    </header>
+    <section class="slider">
+        <i class="far fa-arrow-alt-circle-left fa-2x clickable left-arrow"></i>
+        <i class="far fa-arrow-alt-circle-right fa-2x clickable right-arrow"></i>
+        <div class="img-block">
+            <img src="img/5.png" id="last-img" />
+            <img src="img/1.png"/>
+            <img src="img/2.png"/>
+            <img src="img/3.png"/>
+            <img src="img/4.png"/>
+            <img src="img/5.png"/>
+            <img src="img/1.png" id="first-img" />
+        </div>
+
+        <div class="slider__current-page">
+            <i class="fas fa-stop"></i>
+            <i class="fas fa-stop"></i>
+            <i class="fas fa-stop"></i>
+            <i class="fas fa-stop"></i>
+            <i class="fas fa-stop"></i>
+        </div>
+    </section>
+    <script src="./slider.js"></script>
+</body>
+</html>
