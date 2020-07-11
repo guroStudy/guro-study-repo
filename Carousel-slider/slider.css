@@ -64,3 +64,15 @@
     color: #eee;
     opacity: 0.5;
 }
+
+.slider__current-page :first-child {
+    margin-left: 0px !important;
+}
+
+.slider__current-page :nth-child(even) {
+    margin-left: 25px;
+}
+
+.slider__current-page :nth-child(odd) {
+    margin-left: 25px;
+}
