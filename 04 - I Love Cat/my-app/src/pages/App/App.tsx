@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { getCatsByKeyword } from '../../lib/api'
 import { useState, useEffect } from 'react'
 import CatList from '../../components/CatList'
+import './style.scss'
 
 type Breed = {
   id: string
@@ -17,18 +18,33 @@ type Cat = {
 
 function App() {
   const [cats, setCats] = useState<Array<any>>([])
+  const [keyword, setKeyword] = useState<string>('')
 
   const handleSearch = async (keyword: string) => {
     const result = await getCatsByKeyword(keyword)
     setCats(result)
   }
+  const handleInput = (event: FormEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement
+    setKeyword(target.value)
+  }
+
   return (
     <div className="App">
-      <header onClick={() => handleSearch('ab')}>검색</header>
-      <main>
+      <header>
+        <input
+          type="text"
+          name="keyword"
+          value={keyword}
+          placeholder="검색"
+          onChange={(event) => handleInput(event)}
+        />
+        <button onClick={() => handleSearch(keyword)}>검색</button>
+      </header>
+      <main className="result">
         <CatList cats={cats} />
       </main>
-      <footer>푸터</footer>
+      <footer>footer</footer>
     </div>
   )
 }
