@@ -27,12 +27,14 @@
     top: 370px;
     left: 30px;
     z-index: 1;
+    cursor: pointer;
 }
 
 .slider .right-arrow {
     top: 370px;
     right: 30px;
     z-index: 1;
+    cursor: pointer;
 }
 
 .slider .left-arrow:hover {
