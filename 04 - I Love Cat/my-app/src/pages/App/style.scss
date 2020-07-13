@@ -1,8 +1,56 @@
+@import '../../../constant/theme.scss';
+
+.App.dark {
+  // define a css variable for each shade
+  @each $name, $color in $shades-dark {
+    --#{$name}: #{$color};
+  }
+
+  // define a css variable for each color
+  @each $name, $color in $colors-dark {
+    --#{$name}: #{$color};
+  }
+
+  // define a css variable for each theme color
+  @each $name, $color in $theme-dark {
+    --#{$name}: #{$color};
+  }
+
+  $primary: map-get($colors-dark, 'aqua');
+  --primary: #{$primary};
+  --primary-dark: #{darken($primary, 10%)};
+  --primary-darker: #{darken($primary, 20%)};
+}
+
+.App.light {
+  // define a css variable for each shade
+  @each $name, $color in $shades-light {
+    --#{$name}: #{$color};
+  }
+
+  // define a css variable for each color
+  @each $name, $color in $colors-light {
+    --#{$name}: #{$color};
+  }
+
+  // define a css variable for each theme color
+  @each $name, $color in $theme-light {
+    --#{$name}: #{$color};
+  }
+
+  $primary: map-get($colors-light, 'ruby');
+  --primary: #{$primary};
+  --primary-dark: #{darken($primary, 10%)};
+  --primary-darker: #{darken($primary, 20%)};
+}
+
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 
   header {
     display: flex;
@@ -14,30 +62,31 @@
       outline: none;
       padding: 1rem 2rem;
       border-radius: 0.25rem 0 0 0.25rem;
-      border: 1px solid rgb(231, 231, 231);
-      background-color: rgb(231, 231, 231);
+      border: 1px solid var(--border-color);
+      background-color: var(--border-color);
       font-size: 1rem;
       transition: all 0.2s ease-in-out;
+      color: var(--text-color);
     }
 
     input[type='text']:focus {
-      border: 1px solid #333;
-      background-color: white;
+      border: 1px solid var(--border-dark-color);
+      background-color: var(--shade-3);
     }
 
     button {
       padding: 1rem;
-      border: 1px solid rgb(212, 217, 223);
+      border: 1px solid var(--shade-4);
       outline: none;
-      background-color: rgb(212, 217, 223);
+      background-color: var(--shade-4);
       border-radius: 0 0.25rem 0.25rem 0;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
 
       &:hover {
-        background-color: rgb(195, 199, 204);
-        border-color: rgb(195, 199, 204);
+        background-color: var(--shade-5);
+        border-color: var(--shade-5);
       }
     }
   }

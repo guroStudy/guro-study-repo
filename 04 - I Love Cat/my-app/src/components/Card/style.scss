@@ -1,7 +1,7 @@
 .card {
   padding: 0;
   overflow: hidden;
-  border: 1px solid #eee;
+  border: 1px solid var(--border-color);
   flex: 1 0 280px;
   margin: 0.5rem;
   border-radius: 4px;

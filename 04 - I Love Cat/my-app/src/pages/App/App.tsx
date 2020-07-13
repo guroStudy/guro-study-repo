@@ -2,6 +2,7 @@ import React, { FormEvent } from 'react'
 import { getCatsByKeyword } from '../../lib/api'
 import { useState, useEffect } from 'react'
 import CatList from '../../components/CatList'
+import Switch from '../../components/Switch'
 import './style.scss'
 
 type Breed = {
@@ -19,6 +20,7 @@ type Cat = {
 function App() {
   const [cats, setCats] = useState<Array<any>>([])
   const [keyword, setKeyword] = useState<string>('')
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   const handleSearch = async (keyword: string) => {
     const result = await getCatsByKeyword(keyword)
@@ -29,8 +31,12 @@ function App() {
     setKeyword(target.value)
   }
 
+  const handleChangeTheme = (isChecked: boolean) => {
+    setIsDarkMode(isChecked)
+  }
+
   return (
-    <div className="App">
+    <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <header>
         <input
           type="text"
@@ -40,6 +46,7 @@ function App() {
           onChange={(event) => handleInput(event)}
         />
         <button onClick={() => handleSearch(keyword)}>검색</button>
+        <Switch onChange={handleChangeTheme} />
       </header>
       <main className="result">
         <CatList cats={cats} />
