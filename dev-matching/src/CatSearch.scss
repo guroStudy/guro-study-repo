@@ -1,0 +1,18 @@
+form {
+    text-align: center;
+
+    input {
+        font-size: 17px;
+        border: none;
+        width: 160px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &[type=submit] {
+            width: 70px;
+            cursor: pointer;
+        }
+    }
+}
