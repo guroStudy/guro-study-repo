@@ -1,0 +1,111 @@
+// dark theme
+
+$shades-dark: ('shade-6': #f5f5f5,
+    'shade-5': #bdbdbd,
+    'shade-4': #9e9e9e,
+    'shade-3': #757575,
+    'shade-2': #616161,
+    'shade-1': #303437,
+    'shade-0': #404447,
+);
+
+$colors-dark: ('forest': #239f28,
+    'aqua': #8ab4f8,
+    'ruby': #c93939,
+    'zing': #20cac3,
+    'carrot': #e9853e,
+    'grape': #7542f2,
+    'midnight': #433f5c,
+    'slate': #657786,
+);
+
+$theme-dark: ('bg-color': map-get($shades-dark, 'shade-1'),
+    'border-color': map-get($shades-dark, 'shade-2'),
+    'border-dark-color': map-get($shades-dark, 'shade-3'),
+    'text-color': map-get($shades-dark, 'shade-6'),
+    'muted': map-get($colors-dark, 'slate'),
+    'subtle': map-get($shades-dark, 'shade-4'),
+);
+
+// light theme
+
+$colors-light: ('forest': #239f28,
+    'aqua': #186eef,
+    'ruby': #c93939,
+    'zing': #20cac3,
+    'carrot': #e9853e,
+    'grape': #7542f2,
+    'midnight': #433f5c,
+    'slate': #657786,
+);
+
+$shades-light: ('shade-0': #ffffff,
+    'shade-1': #f5f5f5,
+    'shade-2': #d8d8d8,
+    'shade-3': #bbbbbb,
+    'shade-4': #979797,
+    'shade-5': #535353,
+    'shade-6': #0c0c0c,
+);
+
+$theme-light: ('bg-color': map-get($shades-light, 'shade-1'),
+    'border-color': map-get($shades-light, 'shade-2'),
+    'border-dark-color': map-get($shades-light, 'shade-3'),
+    'text-color': map-get($shades-light, 'shade-6'),
+    'muted': map-get($colors-light, 'slate'),
+    'subtle': map-get($shades-light, 'shade-4'),
+);
+
+// app
+
+.app.light {
+
+    // define a css variable for each shade
+    @each $name,
+    $color in $shades-light {
+        --#{$name}: #{$color};
+    }
+
+    // define a css variable for each color
+    @each $name,
+    $color in $colors-light {
+        --#{$name}: #{$color};
+    }
+
+    // define a css variable for each theme color
+    @each $name,
+    $color in $theme-light {
+        --#{$name}: #{$color};
+    }
+
+    $primary: map-get($colors-light, 'ruby');
+    --primary: #{$primary};
+    --primary-dark: #{darken($primary, 10%)};
+    --primary-darker: #{darken($primary, 20%)};
+}
+
+.app.dark {
+
+    // define a css variable for each shade
+    @each $name,
+    $color in $shades-dark {
+        --#{$name}: #{$color};
+    }
+
+    // define a css variable for each color
+    @each $name,
+    $color in $colors-dark {
+        --#{$name}: #{$color};
+    }
+
+    // define a css variable for each theme color
+    @each $name,
+    $color in $theme-dark {
+        --#{$name}: #{$color};
+    }
+
+    $primary: map-get($colors-dark, 'aqua');
+    --primary: #{$primary};
+    --primary-dark: #{darken($primary, 10%)};
+    --primary-darker: #{darken($primary, 20%)};
+}
