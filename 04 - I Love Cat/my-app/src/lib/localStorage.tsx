@@ -1,13 +1,13 @@
-export const getCatsFromStorage = () => {
-  const cats = localStorage.getItem('cats')
+export const getCatsFromStorage = (): Cat[] => {
+  const cats = localStorage.getItem('cats');
 
   if (cats) {
-    return JSON.parse(cats)
+    return JSON.parse(cats);
   } else {
-    return []
+    return [];
   }
-}
+};
 
-export const setCatsToStorage = (cats: any[]) => {
-  localStorage.setItem('cats', JSON.stringify(cats))
-}
+export const setCatsToStorage = (cats: Cat[]) => {
+  localStorage.setItem('cats', JSON.stringify(cats));
+};
