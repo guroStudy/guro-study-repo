@@ -1,26 +1,26 @@
-import React, { useState, useRef, useEffect } from 'react'
-import './style.scss'
+import React, { useState, useRef, useEffect } from 'react';
+import './style.scss';
 
-const Card = ({ cat }: any) => {
-  const cardRef = useRef<HTMLImageElement>(null)
-  const observerRef = useRef<IntersectionObserver>()
-  const [isLoad, setIsLoad] = useState(false)
+const Card = ({ cat }: { cat: Cat }) => {
+  const cardRef = useRef<HTMLImageElement>(null);
+  const observerRef = useRef<IntersectionObserver>();
+  const [isLoad, setIsLoad] = useState(false);
 
   const onIntersection = (entries: IntersectionObserverEntry[], io: IntersectionObserver) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        io.unobserve(entry.target)
-        setIsLoad(true)
+        io.unobserve(entry.target);
+        setIsLoad(true);
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (!observerRef.current) {
-      observerRef.current = new IntersectionObserver(onIntersection, { threshold: 0.2 })
+      observerRef.current = new IntersectionObserver(onIntersection, { threshold: 0.2 });
     }
-    cardRef.current && observerRef.current.observe(cardRef.current)
-  }, [])
+    cardRef.current && observerRef.current.observe(cardRef.current);
+  }, []);
 
   return (
     <article className="card" ref={cardRef} data-id={cat.id}>
@@ -29,7 +29,7 @@ const Card = ({ cat }: any) => {
       </div>
       <div className="card-info">{cat.breeds[0].name}</div>
     </article>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

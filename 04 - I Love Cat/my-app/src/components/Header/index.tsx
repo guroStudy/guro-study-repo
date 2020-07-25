@@ -1,7 +1,7 @@
-import React from 'react'
-import Switch from '../Switch'
-import { TiWeatherNight, TiWeatherSunny } from 'react-icons/ti'
-import SearchKeywords from '../../components/SearchKeywords'
+import React from 'react';
+import Switch from '../Switch';
+import { TiWeatherNight, TiWeatherSunny } from 'react-icons/ti';
+import SearchKeywords from '../../components/SearchKeywords';
 
 const Header = ({
   keyword,
@@ -11,7 +11,17 @@ const Header = ({
   handleSearch,
   isDarkMode,
   keywords,
-}: any) => {
+  prefersDark,
+}: {
+  keyword: string;
+  handleInput: (event: React.FormEvent<HTMLInputElement>) => void;
+  handleKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleChangeTheme: (isCheked: boolean) => void;
+  handleSearch: (keyword: string) => Promise<void>;
+  isDarkMode: boolean;
+  keywords: string[];
+  prefersDark: boolean;
+}) => {
   return (
     <header>
       <div className="inner">
@@ -26,14 +36,14 @@ const Header = ({
           />
           <button onClick={() => handleSearch(keyword)}>검색</button>
           <div className="theme-switch">
-            <Switch onChange={handleChangeTheme} initialTheme={isDarkMode} />
+            <Switch onChange={handleChangeTheme} initialTheme={prefersDark} />
             <span className="theme-icon">{isDarkMode ? <TiWeatherNight /> : <TiWeatherSunny />}</span>
           </div>
         </div>
         <SearchKeywords keywords={keywords} handleSearch={handleSearch} />
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default React.memo(Header)
+export default React.memo(Header);
